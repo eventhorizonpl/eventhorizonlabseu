@@ -2,7 +2,8 @@ FROM node:lts-alpine AS builder
 WORKDIR '/app'
 COPY package.json package-lock.json ./
 RUN npm install
-COPY ./ ./
+COPY angular.json karma.conf.js tsconfig.app.json tsconfig.json tsconfig.spec.json ./
+COPY src src/
 RUN npm run build-prod
 
 FROM nginx:stable-alpine
